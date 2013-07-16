@@ -1,0 +1,53 @@
+$color1 = #A9A9A9;
+$color2 = #e0e0e0;
+
+$ph-webkit= "::-webkit-input-placeholder";
+$ph-moz1  = ":-moz-placeholder";	/* FF4-18 */
+$ph-moz2  = "::-moz-placeholder";	/* FF19+ */
+$ph-ms    = ":-ms-input-placeholder";	/* IE10+ */
+
+
+for i in $ph-webkit $ph-moz1 $ph-moz2 $ph-ms {
+    {i} {
+        color: $color1
+        opacity: 1
+    }
+    :focus{i} {
+        color:transparent
+    }
+    .ph-fix :focus{i} {
+        color:$color2
+    }
+}
+
+.ph-fix {$ph-ms} {
+    color:transparent
+}
+.ph-safari {$ph-webkit} {
+    color:transparent
+}
+
+.ph-label {
+    position:relative;
+    border:none!important;
+    background:transparent!important;
+    vertical-align: top;
+    color: $color1 !important;
+    //text-align:left!important;
+    span {
+        position: absolute;
+        white-space: nowrap;
+        overflow: hidden;
+        color: $color1 !important;
+        pointer-events: none;
+        -ms-user-select: none;
+        user-select: none;
+        //cursor:text;
+    }
+}
+.ph-focus span {
+    color: $color2 !important;
+}
+.ph-hide {
+    display:none!important;
+}

@@ -1,0 +1,22 @@
+/*! placeholder 0.1.0
+ * (c) 2012-2013 Jony Zhang <zj86@live.cn>, MIT Licensed
+ * https://github.com/niceue/placeholder/
+ */
+::-webkit-input-placeholder{color:#a9a9a9;opacity:1}
+:focus::-webkit-input-placeholder{color:transparent}
+.ph-fix :focus::-webkit-input-placeholder{color:#e0e0e0}
+:-moz-placeholder{color:#a9a9a9;opacity:1}
+:focus:-moz-placeholder{color:transparent}
+.ph-fix :focus:-moz-placeholder{color:#e0e0e0}
+::-moz-placeholder{color:#a9a9a9;opacity:1}
+:focus::-moz-placeholder{color:transparent}
+.ph-fix :focus::-moz-placeholder{color:#e0e0e0}
+:-ms-input-placeholder{color:#a9a9a9;opacity:1}
+:focus:-ms-input-placeholder{color:transparent}
+.ph-fix :focus:-ms-input-placeholder{color:#e0e0e0}
+.ph-fix :-ms-input-placeholder{color:transparent}
+.ph-safari ::-webkit-input-placeholder{color:transparent}
+.ph-label{position:relative;border:none !important;background:transparent !important;vertical-align:top;color:#a9a9a9 !important;}
+.ph-label span{position:absolute;white-space:nowrap;overflow:hidden;color:#a9a9a9 !important;pointer-events:none;-ms-user-select:none;user-select:none}
+.ph-focus span{color:#e0e0e0 !important}
+.ph-hide{display:none !important}
