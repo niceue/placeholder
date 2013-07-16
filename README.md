@@ -1,5 +1,5 @@
 ## Placeholder
-Make html5's placeholder fully compatible.
+Makes the html5 input placeholder attribute fully compatible.
 
 
 ### Usage
