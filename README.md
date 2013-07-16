@@ -1,12 +1,12 @@
-### Placeholder
+## Placeholder
 Make html5's placeholder fully compatible.
 
 
 ### Usage
-1. Include resources:
+Include resources
 ``` html
-    <link rel="stylesheet" href="path/to/jquery.placeholder.css">
-    <script type="text/javascript" src="path/to/jquery.placeholder.js"></script>
+<link rel="stylesheet" href="path/to/jquery.placeholder.css">
+<script type="text/javascript" src="path/to/jquery.placeholder.js"></script>
 ```
 
 That's all!
