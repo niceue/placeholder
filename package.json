@@ -2,7 +2,7 @@
     "name": "jquery.placeholder",
     "title": "placeholder",
     "description": "Makes the html5 input placeholder attribute fully compatible.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "keywords": ["placeholder"],
     "homepage": "https://github.com/niceue/placeholder/",
     "author": "Jony Zhang <zj86@live.cn>",
