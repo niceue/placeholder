@@ -1,4 +1,4 @@
-/*! placeholder 0.1.0
+/*! placeholder 0.1.1
  * (c) 2012-2013 Jony Zhang <zj86@live.cn>, MIT Licensed
  * https://github.com/niceue/placeholder/
  */
@@ -6,7 +6,7 @@
     var phType = 1,   //控制placeholder显示方式，0：focus的时候消失，1：输入值的时候消失
         ua = navigator.userAgent.toLowerCase(), 
         check = function(r){return r.test(ua);}, 
-        isIE = !!window.ActiveXObject ? (document.documentMode || (window.XMLHttpRequest ? 7 : 6) ) : 0,
+        isIE = document.documentMode || +(navigator.userAgent.match(/MSIE (\d+)/) && RegExp.$1),
         isChrome = check(/chrome/),
         isMoz = check(/firefox/) && !check(/(compatible|webkit)/) && +(/firefox\/(\d*)/.exec(ua))[1],
         isSafari = check(/safari/) && !isChrome,
@@ -53,9 +53,9 @@
         });
     }
  
-    function changeStatus(el){
+    function changeStatus(el, value){
         var $el = $(el), $label = $el.prevAll('label.'+ labelCls +'[for='+ el.id +']'), hasClass = $label.hasClass(hideCls);
-        if ($el.val() === '') {
+        if (value === "" || $el.val() === '') {
             hasClass && $label.removeClass(hideCls);
         } else {
             !hasClass && $label.addClass(hideCls);
@@ -95,6 +95,24 @@
             }
         };
     }
+
+    if (needCreate()) {
+        var valHooks = $.valHooks;
+        valHooks.input = valHooks.input || {};
+        valHooks.textarea = valHooks.textarea || {};
+        var oldSet = {
+                input: valHooks.input.set,
+                textarea: valHooks.textarea.set
+            };
+        valHooks.input['set'] = valHooks.textarea['set'] = function(elem, value) {
+            var nodeName = elem.nodeName.toLowerCase();
+            oldSet[nodeName] && oldSet[nodeName](elem, value);
+            setTimeout(function(){
+                changeStatus(elem, value);
+            },0);
+        };
+    }
+
    
    /* 绑定到body的一些事件 */
     $(function(){
