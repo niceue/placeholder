@@ -1,4 +1,4 @@
-/*! placeholder 0.1.1
+/*! placeholder 0.1.2
  * (c) 2012-2013 Jony Zhang <zj86@live.cn>, MIT Licensed
  * https://github.com/niceue/placeholder/
  */
@@ -22,15 +22,20 @@
         hideCls = 'ph-hide';
         
     function createPh(dom, css){
-        $(dom || 'input,textarea').filter('[placeholder]').each(function(){
+        var $inputs;
+        if (dom) {
+            $inputs = $(dom).is(':input') ? $(dom) : $(dom).find(':input');
+        } else {
+            $inputs = $('input,textarea');
+        }
+        $inputs.filter(':input[placeholder]').each(function(){
             var $el = $(this), 
                 label = $el.prev('label.'+labelCls);
             if (!label.length) {
-                var id = $el.attr("id"), 
+                var id = this.id, 
                     attrPh = $el.attr('placeholder');
                 if (!id) {
-                    id = 'ph'+ (Math.random().toString().substr(2,8)); //如果没有id,生成一个附带8位随机数的id
-                    $el.attr("id", id);
+                    id = this.id = createId(); //如果没有id,生成一个附带8位随机数的id
                 }
                 label = $('<label class="'+ labelCls + ($el.val()!==''?' '+hideCls:'')+'" for="'+ id +'" onselectstart="return false"><span>'+ attrPh +'</span></label>');
                 phType && inputChange(this, changeStatus);
@@ -53,6 +58,10 @@
         });
     }
  
+    function createId() {
+        return 'ph'+ (Math.random().toString().substr(2,8));
+    }
+
     function changeStatus(el, value){
         var $el = $(el), $label = $el.prevAll('label.'+ labelCls +'[for='+ el.id +']'), hasClass = $label.hasClass(hideCls);
         if (value === "" || $el.val() === '') {
@@ -119,7 +128,8 @@
         var $body = $('body'), 
             phSelector = '[placeholder]',
             getPh = function(el){
-                return $(el).prevAll('label.'+ labelCls +'[for='+ el.id +']');
+                if (!el.id) el.id = createId();
+                return $(el).prevAll('label.'+ labelCls +'[for="'+ el.id +'"]');
             };
 
         //实现placeholder兼容，（IE9的oninput事件有Bug，按退格键不触发,onpropertychange也是）
@@ -129,7 +139,7 @@
                     e.type == 'focusin' ? getPh(this).addClass(focusCls) : getPh(this).removeClass(focusCls);
                     changeStatus(this);
                 });
-                if ( isChrome || (isMoz && isMoz>15) || (isIE && isIE>9) ) $body.addClass('ph-fix');
+                if ( isChrome || (isMoz && isMoz>15) || (isIE && isIE>9) ) $('html').addClass('ph-fix');
                 isSafari && $body.addClass('ph-safari');
             } else {
                 $body.on('focusin focusout', phSelector, function(e){
