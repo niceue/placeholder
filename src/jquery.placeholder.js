@@ -30,14 +30,14 @@
         }
         $inputs.filter(':input[placeholder]').each(function(){
             var $el = $(this), 
-                label = $el.prev('label.'+labelCls);
+                label = $el.prev('label.'+labelCls),
+                attrPh = $el.attr('placeholder');
             if (!label.length) {
-                var id = this.id, 
-                    attrPh = $el.attr('placeholder');
+                var id = this.id;
                 if (!id) {
                     id = this.id = createId(); //如果没有id,生成一个附带8位随机数的id
                 }
-                label = $('<label class="'+ labelCls + ($el.val()!==''?' '+hideCls:'')+'" for="'+ id +'" onselectstart="return false"><span>'+ attrPh +'</span></label>');
+                label = $('<label class="'+ labelCls + ($el.val()!==''?' '+hideCls:'')+'" for="'+ id +'" onselectstart="return false"><span></span></label>');
                 phType && inputChange(this, changeStatus);
                 $el.before(label);
             }
@@ -53,7 +53,7 @@
                 fontSize: $el.css('font-size'),
                 fontFamily: $el.css('font-family'),
                 lineHeight: $el.css('line-height')
-            });
+            }).text(attrPh);
             if (css) label.find('span').css(css);
         });
     }
